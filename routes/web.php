@@ -18,6 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Okunmayan mesaj görme
+Route::get('unreadcount', function () {
+    $count = auth()->user()->getMessageCount();
+    return response()->json(['count'=>$count]);
+})->name('unreadcount');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
